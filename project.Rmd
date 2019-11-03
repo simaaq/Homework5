@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "project"
 output: html_document
 ---
 
@@ -7,22 +7,73 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## R Markdown for student1
+```{python}
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+import numpy as np
+import time
+import matplotlib.pyplot as plt
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+N = 10
+    
+m = np.random.normal(size = (N,N))
+n = np.random.normal(size = (N,N))
+g = np.random.normal(size = (N,1))
 
-```{r cars}
-summary(cars)
+def A_i(x):
+    '''
+    m = np.random.normal(size = (N,N))
+    n = np.random.normal(size = (N,N))
+    g = np.random.normal(size = (N,1))
+    '''
+    res = np.zeros((N,1))
+    for i in range(N):
+        for j in range(N):
+            res[i] += m[i][j]*x[j]
+    for i in range(N):
+        for j in range(N):
+            res[i] += n[i][j]*x[j]
+    res = np.add(res, g)
+    return res
+print(A_i(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]])))
+
+def A_ii(x):
+    '''
+    m = np.random.normal(size = (N,N))
+    n = np.random.normal(size = (N,N))
+    g = np.random.normal(size = (N,1))
+    '''
+    res = np.zeros((N,1))
+    res = np.add(res, np.dot(m, x))
+    res = np.add(res, np.dot(n, x))
+    return res
+print(A_ii(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]])))
+
+
+print(time.time())
+
+def A_iii():
+    start = time.time()
+    res = []
+    for i in range(10000):
+        A_i(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]]))
+        res.append(time.time()-start)
+    plt.plot(res)
+    plt.show()
+    
+
+A_iii()
+
+def A_iiii():
+    start = time.time()
+    res = []
+    for i in range(10000):
+        A_ii(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]]))
+        res.append(time.time()-start)
+    plt.plot(res)
+    plt.show()
+
+A_iiii()
+
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
