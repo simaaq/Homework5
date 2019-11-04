@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 import numpy as np
 import time
+import random
 import matplotlib.pyplot as plt
 
 N = 10
@@ -76,4 +77,76 @@ def A_iiii():
 A_iiii()
 
 ```
+
+
+
+```{r}
+x<- c(1:10)
+
+function_B<- function(x,n){
+M<-matrix(rnorm(n*n),n,n)
+G<-c(rnorm(n))
+s<-c(rep(0,n))
+for(j in 1:n){
+ for(k in 1:n){
+   s[j]<-s[j]+M[j,k]^(x[j]*3)
+ }
+  s[j]<-s[j]+G[j]
+}
+print(s)
+print(M%^%(x*3) + G)
+
+}
+function_B(x,10)
+```
+
+vectorized approach for functionB
+```{r}
+x<-c(1:10)
+function_B_vector<-function(x,n){
+M<-matrix(rnorm(n*n),n,n)
+G<-c(rnorm(n))
+return(M%^%(x*3) + G)
+}
+function_B_vector(x,10)
+```
+
+R for function A
+```{r}
+x<-c(1:10)
+function_A<-function(x,n){
+M <- matrix(rnorm(n*n),n,n)
+N<- matrix(rnorm(n*n),n,n)
+G <- c(rnorm(n))
+s<-c(rep(0,n))
+for (k in 1:n){
+    for(j in 1:n){
+        s[k] <- s[k] +M[k,j]*x[j]+N[k,j]*x[j]
+    }
+    s[k]<-s[k]+G[k]
+    
+}
+print(s)
+print(M%*%x +N%*%x+G)
+}
+function_A(x,10)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
