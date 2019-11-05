@@ -1,0 +1,152 @@
+---
+title: "project"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown for student1
+```{python}
+
+import numpy as np
+import time
+import random
+import matplotlib.pyplot as plt
+
+N = 10
+    
+m = np.random.normal(size = (N,N))
+n = np.random.normal(size = (N,N))
+g = np.random.normal(size = (N,1))
+
+def A_i(x):
+    '''
+    m = np.random.normal(size = (N,N))
+    n = np.random.normal(size = (N,N))
+    g = np.random.normal(size = (N,1))
+    '''
+    res = np.zeros((N,1))
+    for i in range(N):
+        for j in range(N):
+            res[i] += m[i][j]*x[j]
+    for i in range(N):
+        for j in range(N):
+            res[i] += n[i][j]*x[j]
+    res = np.add(res, g)
+    return res
+print(A_i(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]])))
+
+def A_ii(x):
+    '''
+    m = np.random.normal(size = (N,N))
+    n = np.random.normal(size = (N,N))
+    g = np.random.normal(size = (N,1))
+    '''
+    res = np.zeros((N,1))
+    res = np.add(res, np.dot(m, x))
+    res = np.add(res, np.dot(n, x))
+    return res
+print(A_ii(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]])))
+
+
+print(time.time())
+
+def A_iii():
+    start = time.time()
+    res = []
+    for i in range(10000):
+        A_i(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]]))
+        res.append(time.time()-start)
+    plt.plot(res)
+    plt.show()
+    
+
+A_iii()
+
+def A_iiii():
+    start = time.time()
+    res = []
+    for i in range(10000):
+        A_ii(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]]))
+        res.append(time.time()-start)
+    plt.plot(res)
+    plt.show()
+
+A_iiii()
+
+```
+
+
+
+```{r}
+x<- c(1:10)
+
+function_B<- function(x,n){
+M<-matrix(rnorm(n*n),n,n)
+G<-c(rnorm(n))
+s<-c(rep(0,n))
+for(j in 1:n){
+ for(k in 1:n){
+   s[j]<-s[j]+M[j,k]^(x[j]*3)
+ }
+  s[j]<-s[j]+G[j]
+}
+print(s)
+print(M%^%(x*3) + G)
+
+}
+function_B(x,10)
+```
+
+vectorized approach for functionB
+```{r}
+x<-c(1:10)
+function_B_vector<-function(x,n){
+M<-matrix(rnorm(n*n),n,n)
+G<-c(rnorm(n))
+return(M%^%(x*3) + G)
+}
+function_B_vector(x,10)
+```
+
+R for function A
+```{r}
+x<-c(1:10)
+function_A<-function(x,n){
+M <- matrix(rnorm(n*n),n,n)
+N<- matrix(rnorm(n*n),n,n)
+G <- c(rnorm(n))
+s<-c(rep(0,n))
+for (k in 1:n){
+    for(j in 1:n){
+        s[k] <- s[k] +M[k,j]*x[j]+N[k,j]*x[j]
+    }
+    s[k]<-s[k]+G[k]
+    
+}
+print(s)
+print(M%*%x +N%*%x+G)
+}
+function_A(x,10)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
