@@ -186,7 +186,7 @@ A1<-function(x,n){
     }
   }
   ans<-ans1+ans2+G
-  print(ans)
+#  return(ans)
 }
 x<-c(1:10)
 A1(x,10)
@@ -200,7 +200,7 @@ A2<-function(x,n){
   N<-matrix(rnorm(n*n),nrow=n,ncol=n)
   G<-matrix(rnorm(n),nrow=n,ncol=1)
   ans<-crossprod(M,x)+crossprod(N,x)+G
-#  print(ans)
+#  return(ans)
 }
 x<-c(1:10)
 A2(x,10)
@@ -209,19 +209,18 @@ A2(x,10)
 
 ```{r}
 A1time<-function(){
+  #start the clock
+  start_time<-Sys.time()
   #loop through 1:10000
-  input<-c(10, 50, 100, 500, 750, 1000)
-  for(i in 1:6){
-    #start the clock
-    x<-c(1:input[i])
-    start_time<-Sys.time()
-    A1(x,input[i])
+  for(i in 1:10000){
+    x<-c(1:10)
+    A1(x,10)
     #stop the clock
     end_time<-Sys.time()
     t[i]<-end_time-start_time
   }
-  plot(input,t,main="Plot for Prob A Function 1",
-       xlab="dimension n", ylab="time consuming t")
+  plot(1:10000,t,main="Plot for Prob A Function 1",
+       xlab="itration n", ylab="time consuming t")
 }
 A1time()
 ```
@@ -229,19 +228,18 @@ A1time()
 
 ```{r}
 A2time<-function(){
-#loop through 1:10000
-input<-c(10, 100, 500, 1000, 5000, 10000)
-for(i in 1:6){
   #start the clock
-  x<-c(1:input[i])
   start_time<-Sys.time()
-  A2(x,input[i])
-  #stop the clock
-  end_time<-Sys.time()
-  t[i]<-end_time-start_time
+  #loop through 1:10000
+  for(i in 1:10000){
+    x<-c(1:10)
+    A2(x,10)
+    #stop the clock
+    end_time<-Sys.time()
+    t[i]<-end_time-start_time
 }
-plot(input,t,main="Plot for Prob A Function 2",
-     xlab="dimension n", ylab="time consuming t")
+plot(1:10000,t,main="Plot for Prob A Function 2",
+     xlab="itration n", ylab="time consuming t")
 }
 A2time()
 ```
