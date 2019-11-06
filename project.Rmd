@@ -81,42 +81,40 @@ A_iiii()
 ```
 
 
-
 ## R for functionB
 ```{r}
 x<-c(1:10)
 functionB1<-function(x,n){
   input1<-rep(0,times=n)
-  imput2<-rep(0,times=n)
+  input2<-rep(0,times=n)
   output<-rep(0,times=n)
   G<-rep(0,times=n)
   M<-rep(0,times=n*n)
-  N<-rep(0,times=n*n)
+  M3<-rep(0,times=n*n)
   for (i in 1:n){
     G[i]<-rnorm(1)
     for(j in 1:n){
       M[i*n+j]<-rnorm(1)
-      N[i*n+j]<-rnorm(1)
-      input1[i]<-input1[i]+M[i*n+j]*x[j]
-      imput2[i]<-imput2[i]+N[i*n+j]*x[j]
+      M3[i*n+j]<-M[i*n+j]*M[i*n+j]*M[i*n+j]
+      input1[i]<-input1[i]+M3[i*n+j]*x[j]
     }
+    input2[i]<-G[i]*3
   }
-  output<-input1+imput2+G
-  print(output)
+  output<-input1+input2
+  return(output)
 }
+
 functionB1(x,10)
 ```
 
 ```{r}
-x<-c(1:10)
 functionB2<-function(x,n){
   M<-matrix(rnorm(n*n),nrow=n,ncol=n)
-  N<-matrix(rnorm(n*n),nrow=n,ncol=n)
   G<-matrix(rnorm(n),nrow=n,ncol=1)
-  output<-crossprod(M,x)+crossprod(N,x)+G
-  print(output)
+  output<-crossprod(M*M*M,x)+G*3
+  return(output)
 }
-
+x<-c(1:10)
 functionB2(x,10)
 
 ```
@@ -124,40 +122,36 @@ functionB2(x,10)
 
 ```{r}
 functionB1time<-function(){
-  input<-c(10, 100, 500, 1000, 5000, 10000)
-  for(i in 1:6){
-    x<-c(1:input[i])
-    start_time<-Sys.time()
-    functionB1(x,input[i])
+  start_time<-Sys.time()
+  for(i in 1:10000){
+    x<-c(1:10)
+    functionB1(x,10)
     end_time<-Sys.time()
     t[i]<-end_time-start_time
   }
-  plot(input,t,main="Plot for Prob B Function 1",
+  plot(1:10000,t,main="Plot for Prob B Function 1",
        xlab="dimension n", ylab="time consuming t")
 }
 functionB1time()
 
+
 ```
 
 ```{r}
-
 functionB2time<-function(){
-  input<-c(10, 100, 500, 1000, 5000, 10000)
-  for(i in 1:6){
-    x<-c(1:input[i])
-    start_time<-Sys.time()
-    functionB2(x,input[i])
+  start_time<-Sys.time()
+  for(i in 1:10000){
+    x<-c(1:10)
+    functionB2(x,10)
     end_time<-Sys.time()
     t[i]<-end_time-start_time
   }
-  plot(input,t,main="Plot for Prob B Function 2",
+  plot(1:10000,t,main="Plot for Prob B Function 2",
        xlab="dimension n", ylab="time consuming t")
 }
 functionB2time()
 
 ```
-
-
 
 ## R Markdown for student2
 ```{r}
@@ -185,7 +179,6 @@ A1<-function(x,n){
 
 ```
 
-
 ```{r}
 A2<-function(x,n){
   M<-matrix(rnorm(n*n),nrow=n,ncol=n)
@@ -197,7 +190,6 @@ A2<-function(x,n){
 #x<-c(1:10)
 #A2(x,10)
 ```
-
 
 ```{r}
 A1time<-function(){
@@ -217,7 +209,6 @@ A1time<-function(){
 }
 ```
 
-
 ```{r}
 A2time<-function(){
   #loop through 1:10000
@@ -235,7 +226,6 @@ A2time<-function(){
        xlab="dimension n", ylab="time consuming t")
   
 }
-
 ```
 
 
