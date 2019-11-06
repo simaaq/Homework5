@@ -22,11 +22,9 @@ n = np.random.normal(size = (N,N))
 g = np.random.normal(size = (N,1))
 
 def A_i(x):
-    '''
     m = np.random.normal(size = (N,N))
     n = np.random.normal(size = (N,N))
     g = np.random.normal(size = (N,1))
-    '''
     res = np.zeros((N,1))
     for i in range(N):
         for j in range(N):
@@ -39,11 +37,11 @@ def A_i(x):
 print(A_i(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]])))
 
 def A_ii(x):
-    '''
+
     m = np.random.normal(size = (N,N))
     n = np.random.normal(size = (N,N))
     g = np.random.normal(size = (N,1))
-    '''
+
     res = np.zeros((N,1))
     res = np.add(res, np.matmul(m, x))
     res = np.add(res, np.matmul(n, x))
@@ -83,91 +81,84 @@ A_iiii()
 ```
 
 
-
 ## R for functionB
 ```{r}
-B1<-function(x,n){
-  ans1<-rep(0,times=n)
-  ans2<-rep(0,times=n)
-  ans<-rep(0,times=n)
+x<-c(1:10)
+functionB1<-function(x,n){
+  input1<-rep(0,times=n)
+  input2<-rep(0,times=n)
+  output<-rep(0,times=n)
   G<-rep(0,times=n)
   M<-rep(0,times=n*n)
-  N<-rep(0,times=n*n)
+  M3<-rep(0,times=n*n)
   for (i in 1:n){
     G[i]<-rnorm(1)
     for(j in 1:n){
       M[i*n+j]<-rnorm(1)
-      N[i*n+j]<-rnorm(1)
-      ans1[i]<-ans1[i]+M[i*n+j]*x[j]
-      ans2[i]<-ans2[i]+N[i*n+j]*x[j]
+      M3[i*n+j]<-M[i*n+j]*M[i*n+j]*M[i*n+j]
+      input1[i]<-input1[i]+M3[i*n+j]*x[j]
     }
+    input2[i]<-G[i]*3
   }
   ans<-ans1+ans2+G
   print(ans)
 }
 x<-c(1:10)
 B1(x,10)
+
 ```
 
 ```{r}
-
-B2<-function(x,n){
+functionB2<-function(x,n){
   M<-matrix(rnorm(n*n),nrow=n,ncol=n)
-  N<-matrix(rnorm(n*n),nrow=n,ncol=n)
   G<-matrix(rnorm(n),nrow=n,ncol=1)
-  ans<-crossprod(M,x)+crossprod(N,x)+G
-  #  print(ans)
+  output<-crossprod(M*M*M,x)+G*3
+  return(output)
 }
-#x<-c(1:10)
-#B2(x,10)
+x<-c(1:10)
+functionB2(x,10)
 
 ```
 
 
 ```{r}
-B1time<-function(){
-  #loop through 1:10000
-  input<-c(10, 100, 500, 1000, 5000, 10000)
-  for(i in 1:6){
-    #start the clock
-    x<-c(1:input[i])
-    start_time<-Sys.time()
-    B1(x,input[i])
-    #stop the clock
+functionB1time<-function(){
+  start_time<-Sys.time()
+  for(i in 1:10000){
+    x<-c(1:10)
+    functionB1(x,10)
     end_time<-Sys.time()
     t[i]<-end_time-start_time
   }
-  plot(input,t,main="Plot for Prob B Function 1",
+  plot(1:10000,t,main="Plot for Prob B Function 1",
        xlab="dimension n", ylab="time consuming t")
 }
-B1time()
+functionB1time()
+
 
 ```
 
 ```{r}
-
-B2time<-function(){
-  #loop through 1:10000
-  input<-c(10, 100, 500, 1000, 5000, 10000)
-  for(i in 1:6){
-    #start the clock
-    x<-c(1:input[i])
-    start_time<-Sys.time()
-    B2(x,input[i])
-    #stop the clock
+functionB2time<-function(){
+  start_time<-Sys.time()
+  for(i in 1:10000){
+    x<-c(1:10)
+    functionB2(x,10)
     end_time<-Sys.time()
     t[i]<-end_time-start_time
   }
-  plot(input,t,main="Plot for Prob B Function 2",
+  plot(1:10000,t,main="Plot for Prob B Function 2",
        xlab="dimension n", ylab="time consuming t")
 }
-B2time()
+functionB2time()
 
 ```
-
 
 
 ## student2 function A
+=======
+## R Markdown for student2
+
 ```{r}
 A1<-function(x,n){
   ans1<-rep(0,times=n)
@@ -193,7 +184,6 @@ A1(x,10)
 
 ```
 
-
 ```{r}
 A2<-function(x,n){
   M<-matrix(rnorm(n*n),nrow=n,ncol=n)
@@ -205,7 +195,6 @@ A2<-function(x,n){
 x<-c(1:10)
 A2(x,10)
 ```
-
 
 ```{r}
 A1time<-function(){
@@ -224,7 +213,6 @@ A1time<-function(){
 }
 A1time()
 ```
-
 
 ```{r}
 A2time<-function(){
