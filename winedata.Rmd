@@ -1,0 +1,24 @@
+---
+title: "winedata"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Use Eulidean distance measurement to calculate distance between two points
+
+distance <- function(p1, p2) {
+  Matrixdistance <- matrix(NA, nrow=dim(p1)[1], ncol=dim(p2)[1])
+  for(i in 1:nrow(p2)) {
+    Matrixdistance[,i] <- sqrt(rowSums(t(t(p1)-p2[i,])^2))
+  }
+  Matrixdistance
+}
+
+
+
+```
+
