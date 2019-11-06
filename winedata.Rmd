@@ -39,3 +39,14 @@ newkmeans <- function(mydata, centers, ntimes) {
 
 ```
 
+```{r}
+#main
+wine_scale<-scale(wine[-1])
+mdata=as.matrix(wine_scale) #turn into a matrix
+centers <- mdata[sample(nrow(mdata), 3),] 
+res <- newkmeans(mdata, centers, 10)
+res
+clusplot(wine_scale, res$cluster)
+#plotcluster(wine_scale,res$clusters)
+```
+
