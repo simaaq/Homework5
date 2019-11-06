@@ -177,8 +177,8 @@ A2<-function(x,n){
 ```{r}
 A1time<-function(){
   #loop through 1:10000
-  i<-c(10, 100, 500, 1000, 5000, 10000)
-  for(val in i){
+  x<-c(10, 100, 500, 1000, 5000, 10000)
+  for(i in x){
     #start the clock
     x<-c(1:i)
     start_time<-Sys.time()
@@ -187,17 +187,18 @@ A1time<-function(){
     end_time<-Sys.time()
     t[i]<-end_time-start_time
   }
-  plot(i,t,main="Plot for Prob A Function 1",
+  plot(x,t,main="Plot for Prob A Function 1",
        xlab="dimension n", ylab="time consuming t")
 }
+A1time()
 ```
 
 
 ```{r}
 A2time<-function(){
   #loop through 1:10000
-  i<-c(10, 100, 500, 1000, 5000, 10000)
-  for(val in i){
+  x<-c(10, 100, 500, 1000, 5000, 10000)
+  for(i in x){
     #start the clock
     x<-c(1:i)
     start_time<-Sys.time()
@@ -206,10 +207,11 @@ A2time<-function(){
     end_time<-Sys.time()
     t[i]<-end_time-start_time
   }
-  plot(i,t,main="Plot for Prob A Function 2",
+  plot(x,t,main="Plot for Prob A Function 2",
        xlab="dimension n", ylab="time consuming t")
   
 }
+A2time()
 ```
 
 
