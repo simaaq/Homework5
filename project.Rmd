@@ -103,10 +103,10 @@ B1<-function(x,n){
     }
   }
   ans<-ans1+ans2+G
-  #  print(ans)
+  print(ans)
 }
-#x<-c(1:10)
-#B1(x,10)
+x<-c(1:10)
+B1(x,10)
 ```
 
 ```{r}
@@ -167,7 +167,7 @@ B2time()
 
 
 
-## R Markdown for student2
+## student2 function A
 ```{r}
 A1<-function(x,n){
   ans1<-rep(0,times=n)
@@ -186,10 +186,10 @@ A1<-function(x,n){
     }
   }
   ans<-ans1+ans2+G
-#  print(ans)
+  print(ans)
 }
-#x<-c(1:10)
-#A1(x,10)
+x<-c(1:10)
+A1(x,10)
 
 ```
 
@@ -202,8 +202,8 @@ A2<-function(x,n){
   ans<-crossprod(M,x)+crossprod(N,x)+G
 #  print(ans)
 }
-#x<-c(1:10)
-#A2(x,10)
+x<-c(1:10)
+A2(x,10)
 ```
 
 
@@ -246,7 +246,26 @@ plot(input,t,main="Plot for Prob A Function 2",
 A2time()
 ```
 
+## student2 function B
+```{python}
+import numpy as np
+import time
+import matplotlib.pyplot as plt
 
+n = 10
+def B1(x):
+    M=[[0 for i in range(n)] for j in range(n)]
+    G=[0 for i in range(n)] 
+    ans=[0 for i in range(n)] 
+    for i in range(n):
+        G[i]=np.random.normal(size = 1)
+        ans[i] += G[i]*3
+        for j in range(n):
+            M[i][j]=np.random.normal(size = 1)
+            ans[i] += M[i][j]*M[i][j]*M[i][j]*x[j]
+    return ans
+print(B1(np.array([1,2,3,4,5,6,7,8,9,10])))
+```
 
 
 
