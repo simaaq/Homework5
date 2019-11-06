@@ -22,11 +22,9 @@ n = np.random.normal(size = (N,N))
 g = np.random.normal(size = (N,1))
 
 def A_i(x):
-    '''
     m = np.random.normal(size = (N,N))
     n = np.random.normal(size = (N,N))
     g = np.random.normal(size = (N,1))
-    '''
     res = np.zeros((N,1))
     for i in range(N):
         for j in range(N):
@@ -39,11 +37,11 @@ def A_i(x):
 print(A_i(np.array([[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]])))
 
 def A_ii(x):
-    '''
+
     m = np.random.normal(size = (N,N))
     n = np.random.normal(size = (N,N))
     g = np.random.normal(size = (N,1))
-    '''
+
     res = np.zeros((N,1))
     res = np.add(res, np.matmul(m, x))
     res = np.add(res, np.matmul(n, x))
