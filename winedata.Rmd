@@ -24,9 +24,8 @@ distance <- function(p1, p2) {
 ##K means algorithm implementation
 ##mydata<-data stored in matrix
 ##centers<-centers in kmean
-##ntimes<-run algorithm for n times
-newkmeans <- function(mydata, centers, ntimes) {
-  for(i in 1:ntimes) {
+newkmeans <- function(mydata, centers) {
+  for(i in 1:10) {
     disttocenter <- distance(mydata, centers)
     clusters <- apply(diststocenter, 1, which.min)
     centers <- apply(mydata, 2, tapply, clusters, mean)
@@ -37,5 +36,15 @@ newkmeans <- function(mydata, centers, ntimes) {
   list(clusters=finalcluster, centers=finalcenter)
 }
 
+```
+
+```{r}
+#main
+wine_scale<-scale(wine[-1])
+mdata=as.matrix(wine_scale) #turn into a matrix
+centers <- mdata[sample(nrow(mdata), 3),] 
+res <- newkmeans(mdata, centers)
+res
+clusplot(wine_scale, res$cluster)
 ```
 
