@@ -82,7 +82,6 @@ def A_iiii():
 A_iiii()
 ```
 
-
 ## R for functionB
 ```{r}
 B1<-function(x,n){
@@ -102,21 +101,24 @@ B1<-function(x,n){
     }
   }
   ans<-ans1+ans2+G
-  #  print(ans)
+  print(ans)
 }
-#x<-c(1:10)
-#A1(x,10)
+```
+
+```{r}
 
 B2<-function(x,n){
   M<-matrix(rnorm(n*n),nrow=n,ncol=n)
   N<-matrix(rnorm(n*n),nrow=n,ncol=n)
   G<-matrix(rnorm(n),nrow=n,ncol=1)
   ans<-crossprod(M,x)+crossprod(N,x)+G
-  #  print(ans)
+  print(ans)
 }
-#x<-c(1:10)
-#A2(x,10)
 
+```
+
+
+```{r}
 B1time<-function(){
   #loop through 1:10000
   i<-c(10, 100, 500, 1000, 5000, 10000)
@@ -132,7 +134,9 @@ B1time<-function(){
   plot(i,t,main="Plot for Prob B Function 1",
        xlab="dimension n", ylab="time consuming t")
 }
+```
 
+```{r}
 B2time<-function(){
   #loop through 1:10000
   i<-c(10, 100, 500, 1000, 5000, 10000)
@@ -151,6 +155,8 @@ B2time<-function(){
 }
 
 ```
+
+
 
 ## R Markdown for student2
 ```{r}
